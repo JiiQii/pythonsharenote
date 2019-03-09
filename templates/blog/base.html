@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+{% load octicons %}
+
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>PythonShareNote</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <!--Custom css style -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/master.css' %}">
+
+    <link rel="stylesheet" href="{% static 'ckeditor/ckeditor/plugins/codesnippet/lib/highlight/styles/atelier-seaside.light.css' %}" />
+    <script src="{% static 'ckeditor/ckeditor/plugins/codesnippet/lib/highlight/highlight.pack.js' %}"></script>
+  </head>
+  <body>
+
+<div class="container-fluid">
+  <nav class="navbar navbar-expand-md navfont">
+      <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+          <ul class="navbar-nav mr-auto">
+              <li class="nav-item active">
+                  <a class="nav-link text-success" href="{% url 'index' %}">
+                    PythonShareNote
+                  </a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link text-secondary" href="{% url 'coming' %}">More</a>
+              </li>
+          </ul>
+      </div>
+      <div class="mx-auto order-0">
+          <center><a class="navbar-brand mx-auto" href="{% url 'index' %}"><img id='logo' src="{% static 'image/logo.png' %}" style="width:15%"/></a></center>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
+              <span class="navbar-toggler-icon"></span>
+          </button>
+      </div>
+      <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+          <ul class="navbar-nav ml-auto">
+              <li class="nav-item">
+                  <a class="nav-link text-secondary" target="_blank"  href="//github.com/JiiQii">Github</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link text-secondary" href="{% url 'coming' %}">CodeMusic</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link text-secondary" target="_blank" href="{% url 'email' %}">About</a>
+              </li>
+          </ul>
+      </div>
+  </nav>
+<br>
+<center><h4>The <span class="blueText">Note</span> for <span class="blueText">Python</span>er to Learn and <span class="blueText">Share</span></h4></center>
+<hr>
+</div>
+<div class="container-fluid" style="margin-top:-1.75%;">
+  {% block topics %}
+  {% endblock %}
+</div>
+
+<div class="container-fluid">
+  <div class="row">
+      <div class="col-sm-9">
+        <div class="vl">
+          <div class="card" style="margin-left:10%;">
+            <div class="card-body">
+              {% block content %}
+              {% endblock %}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-3" >
+          <div class="music">
+            <iframe src="https://open.spotify.com/embed/track/5ZFRx5NyLk2DH61nyCNZLY" width="240" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+            <hr>
+          </div>
+          <div class="display_tags">
+            {% block tags %}
+            {% endblock %}
+          </div>
+      </div>
+  </div>
+</div>
+<div class="foot">
+  <hr style="border-width:2px">
+  <center>© 2019 PythonShareNote All Rights Reserved</center>
+</div>
+
+  <script>hljs.initHighlightingOnLoad();</script>
+  <script type="text/javascript" src="{% static 'js/blog.js' %}"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  </body>
+</html>

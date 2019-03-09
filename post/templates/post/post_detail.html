@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block topics %}
+
+<div class="container">
+  <ul class="nav nav-pills justify-content-center topicnav">
+  {% for topic in topics %}
+  <li class="nav-item">
+    <a class="nav-link text-success" href="{% url 'topic_posts' topic_id=topic.id %}">{{ topic.topic_name }}</a>
+  </li>
+   {% endfor %}
+  </ul>
+
+
+</div>
+
+
+{% endblock %}
+{% block content %}
+<div class="post_content">
+  <h4 class='posttitle loader'>{{ post.title }}</h4>
+  <ul class="list-inline">
+    <li class="list-inline-item"><h5><a href="{% url 'topic_posts' topic_id=post.topic_name.id %}" class="text-success">{{ post.topic_name }}</a></h5></li> &nbsp
+    {% for tag in post.tag_name.all %}
+        <li class="list-inline-item"><a href="{% url 'tag_posts' tag_id=tag.id %}" class="text-success">#{{ tag }}</a></li> &nbsp
+    {% endfor %}
+    <li class="list-inline-item text-secondary">{{ post.created_date|date:'d/m/Y' }}</li>
+  </ul>
+  {% for link in links %}
+  <p>{{ link.short_des }} : <a href="{{ link.url_address }}">{{ link.url_address }}</a></p>
+  {% endfor %}
+  <p class='postcontent' >{{ post.message_html|safe }}</p>
+
+</div>
+
+{% endblock %}
+{% block tags %}
+  <nav class="nav flex-column" >
+    {% for tag in tags %}
+  <a class="nav-link active text-success" href="{% url 'tag_posts' tag_id=tag.id %}">#{{tag.tag_name}}</a>
+  {% endfor %}
+  </nav>
+{% endblock %}

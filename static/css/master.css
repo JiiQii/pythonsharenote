@@ -1,0 +1,29 @@
+.navfont {
+  font-size: 36px;
+  margin-bottom: -2.5%;
+  font-weight: bold;
+}
+.topicnav {
+  font-size: 27px;
+  font-weight: bold;
+
+}
+
+#posthr {
+
+  border-width: 3px;
+}
+
+body {
+  background-color: #f7f7f7;
+}
+.card {
+  background-color: #efefef;
+}
+.blueText {
+  color: #1e8935;
+}
+.div.sticky {
+  position: sticky;
+  position: -webkit-sticky;
+}

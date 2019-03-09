@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<div class="row">
+  <div class="col-sm" >
+
+      <h5>Contact</h5>
+      <form method="post" novalidate>
+        {% csrf_token %}
+        {{ form|crispy }}
+        <button type="submit" class="btn btn-success">Send</button>
+      </form>
+
+  </div>
+  <div class="col-sm" >
+
+      <h5>Hello there! </h5>
+      <br>
+      <p><i>My name is Ji Qi, I'm a passionate software developer. At the moment, I'm living in Ann Arbor, Michigan. I graduated from MS CS program in 2018. Currently I am working with Python and Django. I also am experienced with Java, and JavaScript etc.</p>
+        <p><i>I am also interested in Data Science, Data Analyze，Machine Learning，Web Scraping etc.</i> </p>
+  <p><i>I hope to save and share some of my thoughts and experience about programming by this blog. Even though I'm still learning, I think this is good start for better learning and shareing.</i></p>
+  <p><i>Please reach me out if you have any thoughts. <b>Email: qijiwind@gmail.com</b></i></p>
+  <p><i>Thank you!</i> </p>
+
+  </div>
+</div>
+{% endblock %}
+
+{% block tags %}
+
+{% endblock %}

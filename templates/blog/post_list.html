@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% load octicons %}
+{% block topics %}
+
+  <ul class="nav nav-pills justify-content-center topicnav">
+  {% for topic in topics %}
+  <li class="nav-item">
+    <a class="nav-link text-success" href="{% url 'topic_posts' topic_id=topic.id %}">{{ topic.topic_name }}</a>
+  </li>
+   {% endfor %}
+  </ul>
+
+
+
+{% endblock %}
+
+{% block content %}
+
+<div class="post post_content">
+{% if posts %}
+  {% for post in posts %}
+      <a href="{% url 'post_detail' pk=post.pk %}" class="text-dark" style="font-weight:bold;"><h5>{{ post.title }}</h5></a>
+      <ul class="list-inline">
+        <li class="list-inline-item">
+          <a href="{% url 'topic_posts' topic_id=post.topic_name.id %}" class="text-success" style="font-weight:bold;">{{post.topic_name}}</a> &nbsp;
+        </li>
+        {% for tag in post.tag_name.all %}
+        <li class="list-inline-item">
+          <a href="{% url 'tag_posts' tag_id=tag.id %}" class="text-success">#{{tag.tag_name}}</a> &nbsp;
+        </li>
+        {% endfor %}
+        <li class="list-inline-item text-secondary" >{{ post.published_date|date:'d m Y' }}</li>
+      </ul>
+        <hr id="posthr">
+    {% endfor %}
+</div>
+<br>
+{% if is_paginated %}
+      <div class="pagination">
+
+              {% if page_obj.has_previous %}
+                  <a href="{{ request.path }}?page={{ page_obj.previous_page_number }}">
+                    <b class="text-success"><</b>
+                  </a>
+              {% endif %}
+
+              <span class="page-current">
+                  &nbsp; {{ page_obj.number }} of {{ page_obj.paginator.num_pages }} &nbsp;
+              </span>
+              {% if page_obj.has_next %}
+                  <a href="{{ request.path }}?page={{ page_obj.next_page_number }}">
+                    <b class="text-success">></b>
+                  </a>
+              {% endif %}
+
+
+      </div>
+
+    {% endif %}
+        {% else %}
+        <h4 style="white-space: pre;"> No Post </h4>
+        <h3>Please check out others.</h3>
+{% endif %}
+{% endblock %}
+
+
+{% block tags %}
+<nav class="nav flex-column">
+  {% for tag in tags %}
+<a class="nav-link active text-success" href="{% url 'tag_posts' tag_id=tag.id %}">#{{tag.tag_name}}</a>
+{% endfor %}
+</nav>
+{% endblock %}

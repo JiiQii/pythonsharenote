@@ -30,7 +30,11 @@
           </ul>
       </div>
       <div class="mx-auto order-0">
-          <center><a class="navbar-brand mx-auto" href="{% url 'index' %}"><img id='logo' src="{% static 'image/logo.png' %}" style="width:15%"/></a></center>
+          <center><a class="navbar-brand mx-auto" href="{% url 'index' %}">
+              <span id='logo'><img src="{% static 'image/logo.png' %}" style="width:15%"/>
+              </span>
+            </a>
+          </center>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
               <span class="navbar-toggler-icon"></span>
           </button>

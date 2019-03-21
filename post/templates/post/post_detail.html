@@ -30,6 +30,8 @@
   <p>{{ link.short_des }} : <a href="{{ link.url_address }}">{{ link.url_address }}</a></p>
   {% endfor %}
   <p class='postcontent' >{{ post.message_html|safe }}</p>
+  <br>
+    <center><a class="text-success" href="{% url 'index' %}" >HOME</a></center>
 
 </div>
 

@@ -24,7 +24,7 @@
     {% for tag in post.tag_name.all %}
         <li class="list-inline-item"><a href="{% url 'tag_posts' tag_id=tag.id %}" class="text-success">#{{ tag }}</a></li> &nbsp
     {% endfor %}
-    <li class="list-inline-item text-secondary">{{ post.created_date|date:'d/m/Y' }}</li>
+    <li class="list-inline-item text-secondary">{{ post.published_date|date:'d/m/Y' }}</li>
   </ul>
   {% for link in links %}
   <p>{{ link.short_des }} : <a href="{{ link.url_address }}">{{ link.url_address }}</a></p>

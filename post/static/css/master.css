@@ -4,34 +4,36 @@
   font-weight: bold;
 }
 .topicnav {
-  font-size: 27px;
+  font-size: 31px;
   font-weight: bold;
-
 }
-
 #posthr {
-
   border-width: 3px;
 }
-
 body {
   background-color: #f7f7f7;
+  line-height: 1;
 }
 .card {
   background-color: #efefef;
-  line-height: 1.00;
 }
-.blueText {
-  color: #1e8935;
-}
+
 .div.sticky {
   position: sticky;
   position: -webkit-sticky;
 }
-
 #logo:hover img {
     -webkit-filter: invert(50%);
     -ms-transform: scale(1.2); /* IE 9 */
     -webkit-transform: scale(1.2); /* Safari 3-8 */
     transform: scale(1.2);
+}
+.sort_bar {
+  /* margin-left:82%; */
+}
+.post_content {
+
+}
+.search_bar {
+  margin-left:10%;
 }

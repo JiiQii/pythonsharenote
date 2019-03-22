@@ -26,7 +26,18 @@ class BasePostsView(TagsMixinView,CommonMixinView,ListView):
     model = Post
     template_name = "post_list.html" # Quse
     context_object_name = 'posts'
-    paginate_by = 7
+    paginate_by = 10
+
+    def get_queryset(self):
+        order = self.request.GET.get('orderby', '-published_date')
+        new_context = Post.objects.filter(status=Post.STATUS_NORMAL).order_by(order)
+        return new_context
+
+    def get_context_data(self, **kwargs):
+        context = super(BasePostsView, self).get_context_data(**kwargs)
+        context['orderby'] = self.request.GET.get('orderby', 'published_date')
+        context['d_orderby'] = self.request.GET.get('orderby', '-published_date')
+        return context
 
 class IndexView(BasePostsView):
     pass

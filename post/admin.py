@@ -19,8 +19,7 @@ class PostAdmin(admin.ModelAdmin):
     # fields = ['title','author','topic_name','tag_name', 'desc','status','is_md','created_date','message']
     inlines = [RelatedURLInline]
     fieldsets = [
-        (None, {'fields':[('title','author'),('topic_name','tag_name')]}),
-        (None, {'classes':('collapse','addon'),'fields':[('status','is_md','created_date'),'desc']}),
+        (None, {'fields':[('title','author'),('topic_name','tag_name'),('status','is_md','created_date'),('desc')]}),
         (None, {'fields':['message']})
     ]
     list_display=['title', 'topic_name','status', 'author','created_date']

@@ -5,6 +5,7 @@ from django.views.generic import (View,TemplateView,ListView,
                                   UpdateView,DeleteView)
 from django.core.paginator import Paginator
 from django.shortcuts import render
+from django.db.models import Q, F
 
 
 def coming(request):
@@ -40,7 +41,16 @@ class BasePostsView(TagsMixinView,CommonMixinView,ListView):
         return context
 
 class IndexView(BasePostsView):
-    pass
+    def get_queryset(self):
+        query = self.request.GET.get('query')
+        qs = super(IndexView, self).get_queryset()
+        if not query:
+            return qs
+        return qs.filter(Q(title__icontains=query) | Q(tag_name__tag_name__icontains=query))
+
+    def get_context_data(self,**kwargs):
+        query = self.request.GET.get('query')
+        return super(IndexView,self).get_context_data(query=query)
 
 class TopicPostsView(BasePostsView):
     def get_queryset(self):
@@ -60,6 +70,47 @@ class TagPostsView(BasePostsView):
         posts = tag.post_tags.all()
         return posts
 
+# class SearchView(BasePostsView):
+#     def get_context_data(self):
+#         context = super().get_context_data()
+#         context.update({
+#             'keyword': self.request.GET.get('keyword', '')
+#         })
+#         return context
+#
+#     def get_queryset(self):
+#         queryset = super().get_queryset()
+#         keyword = self.request.GET.get('keyword')
+#         # if not keyword:
+#         #     return queryset
+#         # return queryset.filter(Q(title__icontains=keyword) | Q(desc__icontains=keyword))
+#         if keyword:
+#             query_list = query.split()
+#             queryset = queryset.filter(
+#                 reduce(operator.and_,
+#                        (Q(title__icontains=keyword) for keyword in query_list)) |
+#                 reduce(operator.and_,
+#                        (Q(tag_name__icontains=keyword) for keyword in query_list))
+#             )
+#
+#         return queryset
+
+# class SearchView(BasePostsView):
+
+
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data()
+    #     context.update({
+    #         'keyword': self.request.GET.get('keyword', '')
+    #     })
+    #     return context
+    #
+    # def get_queryset(self):
+    #     queryset = super().get_queryset()
+    #     keyword = self.request.GET.get('keyword')
+    #     if not keyword:
+    #         return queryset
+    #     return queryset.filter(Q(title__icontains=keyword))
 
 class PostDetailView(TagsMixinView,CommonMixinView,DetailView):
     model = Post
